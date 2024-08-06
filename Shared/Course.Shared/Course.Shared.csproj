@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\NoContent.cs" />
-    <Compile Include="DTOs\ResponseDto.cs" />
+    <Compile Include="DTOs\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
