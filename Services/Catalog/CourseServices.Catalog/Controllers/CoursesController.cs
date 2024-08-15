@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseServices.Catalog.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CoursesController : CustomBaseController
     {
         public readonly ICourseService _courseService;
@@ -17,6 +17,7 @@ namespace CourseServices.Catalog.Controllers
             this._courseService = courseService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
             var response = await _courseService.GetAllAsync();

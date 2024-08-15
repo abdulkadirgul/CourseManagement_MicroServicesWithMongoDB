@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseServices.Catalog.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CategoriesController : CustomBaseController
     {
         private readonly ICategoryServices _categoryServices;
@@ -16,7 +16,7 @@ namespace CourseServices.Catalog.Controllers
         {
             _categoryServices = categoryServices;
         }
-
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var categories = await _categoryServices.GetAllAsync();
@@ -34,7 +34,6 @@ namespace CourseServices.Catalog.Controllers
         }
 
         [HttpPost]
-        [Route("/api/[controller]/GetAllById/{id}")]
         public async Task<IActionResult> CreateAsync(CategoryDTO categoryDTO)
         {
             var response = await _categoryServices.CreateAsync(categoryDTO);
