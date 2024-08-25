@@ -1,0 +1,6 @@
+@CourseServices.PhotoStock_HostAddress = http://localhost:5031
+
+GET {{CourseServices.PhotoStock_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
