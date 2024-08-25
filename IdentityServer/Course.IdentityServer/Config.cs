@@ -13,9 +13,9 @@ namespace Course.IdentityServer
     {
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
         {
-            new ApiResource("resource_catalog"){Scopes ={"catalog_fullpermission"}},
-            new ApiResource("photo_sctock_catalog"){Scopes ={"photo_sctock_fullpermission"}},
-            new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
+           new ApiResource("resource_catalog"){Scopes ={"catalog_fullpermission"}},
+           new ApiResource("photo_stock_catalog"){Scopes ={"photo_stock_fullpermission"}},
+           new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
@@ -28,17 +28,17 @@ namespace Course.IdentityServer
                                     Name="roles",
                                     DisplayName="Roles",
                                     Description="Kullanıcı Rolleri",
-                                    UserClaims= new[]{"role"} 
+                                    UserClaims= new[]{"role"}
                        }
                    };
 
         public static IEnumerable<ApiScope> ApiScopes =>
-            new ApiScope[]
-            {
-                new ApiScope("catalog_fullpermission", "Catalog API için full erişim"),
-                new ApiScope("photo_stock_fullpermission", "Photo stock API için full erişim"),
-                new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
-            };
+        new ApiScope[]
+        {
+            new ApiScope("catalog_fullpermission", "Catalog API için full erişim"),
+            new ApiScope("photo_stock_fullpermission", "Photo stock API için full erişim"),
+            new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
+        };
 
         public static IEnumerable<Client> Clients =>
             new Client[]
@@ -49,7 +49,7 @@ namespace Course.IdentityServer
                     ClientId ="WebMvcClient",
                     ClientSecrets ={new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes={ "catalog_fullpermission", "photo_sctock_fullpermission",IdentityServerConstants.LocalApi.ScopeName }
+                    AllowedScopes={ "catalog_fullpermission", "photo_stock_fullpermission",IdentityServerConstants.LocalApi.ScopeName }
 
                 },
                  new Client
