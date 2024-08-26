@@ -1,8 +1,27 @@
+using CourseServices.Basket.Services;
+using CourseServices.Basket.Settings;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("RedisSetting"));
+builder.Services.AddSingleton<RedisService>(
+    sp=>
+    {
+        var redisSettings = sp.GetRequiredService<IOptions<RedisSettings>>().Value;
+
+        var redis = new RedisService(redisSettings.Host,redisSettings.Port);
+
+        redis.Connect();
+
+        return redis;
+
+    } );
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
