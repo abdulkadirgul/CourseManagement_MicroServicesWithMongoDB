@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService,SharedIdentityService>();
+builder.Services.AddScoped<IBasketService,BasketService>();
 
 builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("RedisSetting"));
 builder.Services.AddSingleton<RedisService>(
