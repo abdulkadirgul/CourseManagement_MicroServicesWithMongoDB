@@ -1,13 +1,31 @@
 using Course.Shared.Services;
 using CourseServices.Basket.Services;
 using CourseServices.Basket.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+
+var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.Authority = builder.Configuration["IdentityServerURL"];
+    options.Audience = "resource_basket";
+    options.RequireHttpsMetadata = false;
+});
+
+builder.Services.AddControllers(opt =>
+{
+    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
+});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService,SharedIdentityService>();
@@ -39,6 +57,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseAuthentication();
 
 app.UseAuthorization();
 

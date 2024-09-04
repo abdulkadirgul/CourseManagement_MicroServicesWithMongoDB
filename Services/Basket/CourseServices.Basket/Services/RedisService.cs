@@ -14,7 +14,7 @@ namespace CourseServices.Basket.Services
             _port = port;
         }
 
-        public void Connect() => _ConnectionMultiplexer = ConnectionMultiplexer.Connect($"{_host}:{_port}");
+        public void Connect() => _ConnectionMultiplexer = ConnectionMultiplexer.Connect($"localhost:6379");
 
         public IDatabase GetDb(int db=1) => _ConnectionMultiplexer.GetDatabase(db);
     }
