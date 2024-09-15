@@ -21,9 +21,16 @@ namespace Course.Shared.Services
             get
             {
                 var userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst("sub");
+
+                if (userIdClaim == null)
+                {
+                    userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+                }
+
                 return userIdClaim?.Value;
             }
         }
+
 
     }
 }
