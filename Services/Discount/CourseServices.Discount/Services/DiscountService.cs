@@ -64,7 +64,7 @@ namespace CourseServices.Discount.Services
         {
             var status = await _dbConnection.ExecuteAsync("INSERT INTO discount(userid,rate,code) VALUES (@UserId,@Rate,@Code)", discount);
 
-            if (status == 200) {
+            if (status == 1) {
                 return Response<NoContent>.Success(204);
             }
 
@@ -82,7 +82,7 @@ namespace CourseServices.Discount.Services
                                          Rate = discount.Rate
                                      });
 
-            if (status == 200)
+            if (status == 1)
             {
                 return Response<NoContent>.Success(204);
             }

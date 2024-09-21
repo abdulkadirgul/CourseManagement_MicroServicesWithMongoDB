@@ -3,11 +3,18 @@ using CourseServices.Discount.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Npgsql;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<IDbConnection>(sp =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("PostgreSql");
+    return new NpgsqlConnection(connectionString); // PostgreSQL baðlantýsý
+});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService,SharedIdentityService>();
