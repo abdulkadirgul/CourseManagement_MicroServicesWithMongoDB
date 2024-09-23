@@ -20,6 +20,13 @@ namespace CourseServices.Order.Domain.OrderAggregate
             PictureUrl = pictureUrl;
             Price = price;
         }
+
+        public void UpdateOrderItem(string productName,string pictreUrl,decimal price)
+        {
+            ProductName = productName;
+            PictureUrl=pictreUrl;
+            Price = price;
+        }
     }
     
 }
